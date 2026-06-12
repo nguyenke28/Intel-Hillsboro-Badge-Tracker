@@ -200,14 +200,26 @@ function checkStatus() {
 
   document.getElementById("progressFill").style.width = percent + "%";
 
-  if (missing.length === 0) {
-    result.innerHTML = "✅ You are READY!";
-    result.style.color = "green";
+ let persona = document.querySelector('input[name="persona"]:checked').value;
 
+if (missing.length === 0) {
+  result.innerHTML = "✅ You are READY!";
+  result.style.color = "green";
+
+  // ✅ WIFI ONLY FIX
+  if (persona === "wifi") {
+    guidance.innerHTML = `
+      🎉 You're all set!<br><br>
+      ✅ No further action needed for WiFi access.
+    `;
+  } else {
+    // Default (new + renewal)
     guidance.innerHTML = `
       🎉 You're all set!<br><br>
       👉 <a href="${LINKS.final}" target="_blank">Submit FAB Access Request</a>
     `;
+  }
+
   } else {
     result.innerHTML = "❌ Missing steps<br>";
     result.style.color = "#cc0000";
